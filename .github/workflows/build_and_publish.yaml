@@ -75,7 +75,7 @@ jobs:
           body: ${{ steps.changelog.outputs.changes }}
           token: ${{ github.token }}
           tag: ${{ github.ref }}
-          artifacts: ./build/libs/forgebrainlib-${{ steps.get_mc_version.outputs.result }}-${{ steps.get_version.outputs.result }}.jar
+          artifacts: ./Forge/build/libs/forgebrainlib-${{ steps.get_mc_version.outputs.result }}-${{ steps.get_version.outputs.result }}.jar
           artifactContentType: application/java-archive
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -91,7 +91,7 @@ jobs:
           token: ${{ secrets.CURSEFORGE_API_KEY }}
           project_id: 754870
           game_endpoint: minecraft
-          file_path: ./build/libs/forgebrainlib-${{ steps.get_mc_version.outputs.result }}-${{ steps.get_version.outputs.result }}.jar
+          file_path: ./Forge/build/libs/forgebrainlib-${{ steps.get_mc_version.outputs.result }}-${{ steps.get_version.outputs.result }}.jar
           changelog: |-
             [Automated Build]
             ${{ steps.changelog.outputs.changes }}

@@ -9,7 +9,7 @@ if (System.getenv('VERSION') != null) {
     version = "${minecraft_version}-${mod_version}"
 }
 
-archivesBaseName = "${mod_name}-common"
+archivesBaseName = "${mod_id}-common"
 
 minecraft {
     version(minecraft_version)
