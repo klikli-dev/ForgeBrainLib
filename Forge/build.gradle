@@ -1,9 +1,17 @@
 plugins {
+    id 'idea'
+    id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
-archivesBaseName = "${mod_name}-forge-${minecraft_version}"
+if (System.getenv('VERSION') != null) {
+    version = System.getenv('VERSION')
+} else {
+    version = "${minecraft_version}-${mod_version}"
+}
+
+archivesBaseName = "${mod_name}"
 
 minecraft {
     mappings channel: mappings_channel, version: mappings_version
@@ -80,3 +88,37 @@ processResources {
 }
 
 jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourcesJar
+
+            pom {
+                name = 'ForgeBrainLib'
+                description = 'Forge-Only fork of SmartBrainLib with support for older versions and a fully featured maven.'
+                url = 'https://github.com/klikli-dev/ForgeBrainLib'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://raw.githubusercontent.com/klikli-dev/ForgeBrainLib/version/1.19.3/LICENSE'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:ssh:git@github.com:klikli-dev/ForgeBrainLib.git'
+                    url = 'https://github.com/klikli-dev/ForgeBrainLib'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url "https://repo.repsy.io/mvn/klikli-dev/mods"
+            credentials {
+                username = System.getenv('MAVEN_USER')
+                password = System.getenv('MAVEN_PASS')
+            }
+        }
+    }
+}

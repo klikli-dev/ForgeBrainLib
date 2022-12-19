@@ -3,7 +3,13 @@ plugins {
     id 'org.spongepowered.gradle.vanilla' version '0.2.1-SNAPSHOT'
 }
 
-archivesBaseName = "${mod_name}-common-${minecraft_version}"
+if (System.getenv('VERSION') != null) {
+    version = System.getenv('VERSION')
+} else {
+    version = "${minecraft_version}-${mod_version}"
+}
+
+archivesBaseName = "${mod_name}-common"
 
 minecraft {
     version(minecraft_version)

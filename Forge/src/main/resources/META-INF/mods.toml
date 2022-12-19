@@ -1,17 +1,16 @@
 modLoader="javafml"
 loaderVersion="[44,)"
 license="MPL-2.0"
-issueTrackerURL="https://github.com/Tslat/SmartBrainLib/issues"
+issueTrackerURL="https://github.com/klikli-dev/ForgeBrainLib/issues"
 
 [[mods]]
-modId="smartbrainlib"
-version="1.7.1"
-displayName="SmartBrainLib"
+modId="forgebrainlib"
+version="${file.jarVersion}"
+displayName="ForgeBrainLib"
 logoFile="logo.png"
 authors="Tslat"
-displayTest="IGNORE_SERVER_VERSION"
 description='''
-A library mod for smarter Brains and easier usage of the Brain system.
+Forge-Only fork of SmartBrainLib with support for older versions and a fully featured maven.
 '''
 
 [[dependencies.smartbrainlib]]
