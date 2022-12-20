@@ -36,3 +36,4 @@ dependencies {
 
 ForgeBrainLib is binary compatible with SmartBrainLib, please refer to their wiki: [https://github.com/Tslat/SmartBrainLib/wiki](https://github.com/Tslat/SmartBrainLib/wiki)
 
+**Note**: The package has been relocated from "net.tslat.smartbrainlib" to "com.klikli_dev.forgebrainlib" to allow SBL and FBL to coexist in the same installation.
