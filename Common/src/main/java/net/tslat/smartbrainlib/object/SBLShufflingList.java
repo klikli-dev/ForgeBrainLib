@@ -3,19 +3,19 @@ package net.tslat.smartbrainlib.object;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectIterators;
-import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class SBLShufflingList<T> implements Iterable<T> {
 	private final List<WeightedEntry<T>> entries;
-	private final RandomSource random = RandomSource.createNewThreadLocalInstance();
+	private final Random random = new Random();
 
 	public SBLShufflingList() {
 		this.entries = new ObjectArrayList<>();

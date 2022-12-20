@@ -1,15 +1,16 @@
 package net.tslat.smartbrainlib.util;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.PositionalRandomFactory;
+import net.minecraft.world.level.levelgen.RandomSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -18,7 +19,7 @@ import java.util.function.Predicate;
  * Utility class for easy and legible random functionality.
  */
 public final class RandomUtil {
-	public static final EasyRandom RANDOM = new EasyRandom(RandomSource.createThreadSafe());
+	public static final EasyRandom RANDOM = new EasyRandom(new Random());
 
 	public static ThreadLocalRandom getRandomInstance() {
 		return ThreadLocalRandom.current();
@@ -75,7 +76,7 @@ public final class RandomUtil {
 	public static <T> T getRandomSelection(@NotNull List<T> options) {
 		return RANDOM.getRandomSelection(options);
 	}
-	
+
 	@NotNull
 	public static BlockPos getRandomPositionWithinRange(BlockPos centerPos, int xRadius, int yRadius, int zRadius) {
 		return RANDOM.getRandomPositionWithinRange(centerPos, xRadius, yRadius, zRadius);
@@ -85,32 +86,28 @@ public final class RandomUtil {
 	public static BlockPos getRandomPositionWithinRange(BlockPos centerPos, int xRadius, int yRadius, int zRadius, boolean safeSurfacePlacement, Level world) {
 		return RANDOM.getRandomPositionWithinRange(centerPos, xRadius, yRadius, zRadius, safeSurfacePlacement, world);
 	}
-	
+
 	// Deprecated, use the BiPredicate variant below
 	@NotNull
 	@Deprecated(forRemoval = true)
 	public static BlockPos getRandomPositionWithinRange(BlockPos centerPos, int xRadius, int yRadius, int zRadius, int minSpreadX, int minSpreadY, int minSpreadZ, boolean safeSurfacePlacement, Level world, int tries, @Nullable Predicate<BlockState> statePredicate) {
 		return RANDOM.getRandomPositionWithinRange(centerPos, xRadius, yRadius, zRadius, minSpreadX, minSpreadY, minSpreadZ, safeSurfacePlacement, world, tries, statePredicate);
 	}
-	
+
 	@NotNull
 	public static BlockPos getRandomPositionWithinRange(BlockPos centerPos, int xRadius, int yRadius, int zRadius, int minSpreadX, int minSpreadY, int minSpreadZ, boolean safeSurfacePlacement, Level world, int tries, @Nullable BiPredicate<BlockState, BlockPos> statePredicate) {
 		return RANDOM.getRandomPositionWithinRange(centerPos, xRadius, yRadius, zRadius, minSpreadX, minSpreadY, minSpreadZ, safeSurfacePlacement, world, tries, statePredicate);
 	}
 
-	public static final class EasyRandom implements RandomSource  {
-		private final RandomSource random;
+	public static final class EasyRandom implements RandomSource {
+		private final Random random;
 
 		public EasyRandom() {
-			this(RandomSource.create());
+			this(new Random());
 		}
 
-		public EasyRandom(@NotNull RandomSource rand) {
+		public EasyRandom(@NotNull Random rand) {
 			this.random = rand;
-		}
-
-		public RandomSource getSource() {
-			return RandomSource.create();
 		}
 
 		public boolean fiftyFifty() {
@@ -225,12 +222,12 @@ public final class RandomUtil {
 
 		@Override
 		public EasyRandom fork() {
-			return new EasyRandom(this.random.fork());
+			return new EasyRandom(new Random(random.nextLong()));
 		}
 
 		@Override
 		public PositionalRandomFactory forkPositional() {
-			return this.random.forkPositional();
+			throw new RuntimeException("Not implemented");
 		}
 
 		@Override

@@ -236,6 +236,7 @@ public class SmartBrain<E extends LivingEntity & SmartBrainOwner<E>> extends Bra
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public List<Behavior<? super E>> getRunningBehaviors() {
         List<Behavior<? super E>> runningBehaviours = new ObjectArrayList<>();
 

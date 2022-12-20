@@ -12,7 +12,6 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
-import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.pathfinder.Path;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.PredicateSensor;
@@ -23,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A sensor that looks for the nearest home point of interest in the surrounding
@@ -88,8 +88,9 @@ public class NearestHomeSensor<E extends Mob> extends PredicateSensor<E, E> {
 
 			return true;
 		};
-		Set<Pair<Holder<PoiType>, BlockPos>> poiLocations = poiManager.findAllWithType(poiType -> poiType.is(PoiTypes.HOME), predicate, entity.blockPosition(), this.radius, PoiManager.Occupancy.ANY).collect(Collectors.toSet());
-		Path pathToHome = AcquirePoi.findPathToPois(entity, poiLocations);
+
+		Stream<BlockPos> stream = poiManager.findAll(PoiType.HOME.getPredicate(), predicate, entity.blockPosition(), 48, PoiManager.Occupancy.ANY);
+		Path pathToHome = entity.getNavigation().createPath(stream, PoiType.HOME.getValidRange());
 
 		if (pathToHome != null && pathToHome.canReach()) {
 			BlockPos targetPos = pathToHome.getTarget();
