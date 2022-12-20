@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[43,)"
+loaderVersion="[40,)"
 license="MPL-2.0"
 issueTrackerURL="https://github.com/klikli-dev/ForgeBrainLib/issues"
 
@@ -16,12 +16,12 @@ Forge-Only fork of SmartBrainLib with support for older versions and a fully fea
 [[dependencies.smartbrainlib]]
 modId="forge"
 mandatory=true
-versionRange="[43,)"
+versionRange="[40,)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.smartbrainlib]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.19.2,)"
+versionRange="[1.18.2,)"
 ordering="NONE"
 side="BOTH"
