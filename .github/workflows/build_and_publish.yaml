@@ -61,6 +61,7 @@ jobs:
       - name: Update CHANGELOG
         id: changelog
         uses: klikli-dev/changelog-action@main
+        if: ${{ steps.get_release_type.outputs.result != 'test' }}
         with:
           token: ${{ github.token }}
           tag: ${{ github.ref_name }}
