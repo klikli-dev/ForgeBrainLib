@@ -3,6 +3,7 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 if (System.getenv('VERSION') != null) {
@@ -87,7 +88,25 @@ processResources {
     exclude '**/*.accesswidener'
 }
 
-jar.finalizedBy('reobfJar')
+jar {
+    archiveClassifier = "original"
+}
+
+shadowJar {
+    //shoehorn shadowjar to be the main jar, allowing SBL and FBL to live in the same classpath.
+    from sourceSets.main.output
+    archiveClassifier = ""
+    relocate 'net.tslat.smartbrainlib', 'com.klikli_dev.forgebrainlib'
+    finalizedBy 'reobfShadowJar'
+    dependencies {
+        include(project(':Common'))
+        include(project(':Forge'))
+    }
+}
+
+reobf {
+    shadowJar {}
+}
 
 publishing {
     publications {
@@ -95,7 +114,7 @@ publishing {
 
             artifactId = 'forgebrainlib'
 
-            artifact jar
+            artifact shadowJar
             artifact sourcesJar
 
             pom {
