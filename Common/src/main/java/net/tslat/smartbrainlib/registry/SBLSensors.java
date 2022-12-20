@@ -29,15 +29,12 @@ public final class SBLSensors {
 	public static final Supplier<SensorType<NearbyGolemSensor<?>>> NEARBY_GOLEM = register("nearby_golem", NearbyGolemSensor::new);
 	public static final Supplier<SensorType<NearbyAdultSensor<?>>> NEARBY_ADULT = register("nearby_adult", NearbyAdultSensor::new);
 	public static final Supplier<SensorType<ItemTemptingSensor<?>>> ITEM_TEMPTING = register("item_tempting", ItemTemptingSensor::new);
-	public static final Supplier<SensorType<InWaterSensor<?>>> IN_WATER = register("in_water", InWaterSensor::new);
 
 	// Entity Specific
-	public static final Supplier<SensorType<FrogSpecificSensor<?>>> FROG_SPECIFIC = register("frog_specific", FrogSpecificSensor::new);
 	public static final Supplier<SensorType<AxolotlSpecificSensor<?>>> AXOLOTL_SPECIFIC = register("axolotl_specific", AxolotlSpecificSensor::new);
 	public static final Supplier<SensorType<PiglinSpecificSensor<?>>> PIGLIN_SPECIFIC = register("piglin_specific", PiglinSpecificSensor::new);
 	public static final Supplier<SensorType<PiglinBruteSpecificSensor<?>>> PIGLIN_BRUTE_SPECIFIC = register("piglin_brute_specific", PiglinBruteSpecificSensor::new);
 	public static final Supplier<SensorType<HoglinSpecificSensor<?>>> HOGLIN_SPECIFIC = register("hoglin_specific", HoglinSpecificSensor::new);
-	public static final Supplier<SensorType<WardenSpecificSensor<?>>> WARDEN_SPECIFIC = register("warden_specific", WardenSpecificSensor::new);
 
 	// Custom
 	public static final Supplier<SensorType<IncomingProjectilesSensor<?>>> INCOMING_PROJECTILES = register("incoming_projectiles", IncomingProjectilesSensor::new);
