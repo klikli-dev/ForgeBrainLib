@@ -13,13 +13,13 @@ description='''
 Forge-Only fork of SmartBrainLib with support for older versions and a fully featured maven.
 '''
 
-[[dependencies.smartbrainlib]]
+[[dependencies.forgebrainlib]]
 modId="forge"
 mandatory=true
 versionRange="[44,)"
 ordering="NONE"
 side="BOTH"
-[[dependencies.smartbrainlib]]
+[[dependencies.forgebrainlib]]
 modId="minecraft"
 mandatory=true
 versionRange="[1.19.3,)"
