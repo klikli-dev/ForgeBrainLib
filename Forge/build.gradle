@@ -102,6 +102,7 @@ shadowJar {
         include(project(':Common'))
         include(project(':Forge'))
     }
+    processResources.exclude('**/services/net.tslat.smartbrainlib.SBLLoader')
 }
 
 reobf {
