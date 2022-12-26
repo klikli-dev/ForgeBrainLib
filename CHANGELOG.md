@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [release/v1.18.2-1.0.1] - 2022-12-26
+### :bug: Bug Fixes
+- [`1c7b5e2`](https://github.com/klikli-dev/ForgeBrainLib/commit/1c7b5e20c5fe11fe80b3873ad5ed4e7da9cbc960) - curseforge version setting *(commit by [@klikli-dev](https://github.com/klikli-dev))*
+- [`a4432b3`](https://github.com/klikli-dev/ForgeBrainLib/commit/a4432b37809d1c9fcd39519c9712c222018f7974) - crash when smartbrainlib is present too *(commit by [@klikli-dev](https://github.com/klikli-dev))*
+
+
 ## [release/v1.18.2-1.0.0] - 2022-12-20
 ### :sparkles: New Features
 - [`300f960`](https://github.com/klikli-dev/ForgeBrainLib/commit/300f9601113d90c9e06f9208a2fa6342df5642c4) - prepare feature level for 1.18.2 *(commit by [@klikli-dev](https://github.com/klikli-dev))*
@@ -21,3 +27,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 [release/v1.18.2-1.0.0]: https://github.com/klikli-dev/ForgeBrainLib/compare/dummy/v1.18.2-0.0.0...release/v1.18.2-1.0.0
+[release/v1.18.2-1.0.1]: https://github.com/klikli-dev/ForgeBrainLib/compare/release/v1.18.2-1.0.0...release/v1.18.2-1.0.1
