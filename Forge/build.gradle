@@ -1,18 +1,9 @@
 plugins {
-    id 'idea'
-    id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-if (System.getenv('VERSION') != null) {
-    version = System.getenv('VERSION')
-} else {
-    version = "${minecraft_version}-${mod_version}"
-}
-
-archivesBaseName = "${mod_id}"
+archivesBaseName = "${mod_name}-forge-${minecraft_version}"
 
 minecraft {
     mappings channel: mappings_channel, version: mappings_version
@@ -88,60 +79,4 @@ processResources {
     exclude '**/*.accesswidener'
 }
 
-jar {
-    archiveClassifier = "original"
-}
-
-shadowJar {
-    //shoehorn shadowjar to be the main jar, allowing SBL and FBL to live in the same classpath.
-    from sourceSets.main.output
-    archiveClassifier = ""
-    relocate 'net.tslat.smartbrainlib', 'com.klikli_dev.forgebrainlib'
-    finalizedBy 'reobfShadowJar'
-    dependencies {
-        include(project(':Common'))
-        include(project(':Forge'))
-    }
-    processResources.exclude('**/services/net.tslat.smartbrainlib.SBLLoader')
-}
-
-reobf {
-    shadowJar {}
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-
-            artifactId = 'forgebrainlib'
-
-            artifact shadowJar
-            artifact sourcesJar
-
-            pom {
-                name = 'ForgeBrainLib'
-                description = 'Forge-Only fork of SmartBrainLib with support for older versions and a fully featured maven.'
-                url = 'https://github.com/klikli-dev/ForgeBrainLib'
-                licenses {
-                    license {
-                        name = 'MIT License'
-                        url = 'https://raw.githubusercontent.com/klikli-dev/ForgeBrainLib/version/1.19.3/LICENSE'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:ssh:git@github.com:klikli-dev/ForgeBrainLib.git'
-                    url = 'https://github.com/klikli-dev/ForgeBrainLib'
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            url "https://repo.repsy.io/mvn/klikli-dev/mods"
-            credentials {
-                username = System.getenv('MAVEN_USER')
-                password = System.getenv('MAVEN_PASS')
-            }
-        }
-    }
-}
+jar.finalizedBy('reobfJar')
